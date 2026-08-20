@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Qui est-ce ? Honkai: Star Rail</title>
+<style>
+  :root {
+    --red-bg: #ffe6e6;
+    --red-text: #a00000;
+    --red-elim: #ffcccc;
+    --blue-bg: #e6f0ff;
+    --blue-text: #003a9a;
+    --blue-elim: #cce0ff;
+  }
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0; padding: 0;
+    background: var(--red-bg);
+    color: var(--red-text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+  body.blue-theme {
+    background: var(--blue-bg);
+    color: var(--blue-text);
+  }
+  h1 {
+    margin: 1rem 0 0.5rem;
+  }
+  #chosen {
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    min-height: 1.5em;
+  }
+  #controls {
+    margin-bottom: 1rem;
+  }
+  button {
+    background-color: transparent;
+    border: 2px solid currentColor;
+    color: inherit;
+    padding: 0.5em 1em;
+    margin: 0 0.5em;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  button:hover {
+    background-color: currentColor;
+    color: white;
+  }
+  #characters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(100px,1fr));
+    gap: 1rem;
+    width: 90vw;
+    max-width: 800px;
+  }
+  .character {
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    transition: filter 0.3s;
+  }
+  .character img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+  }
+  .character:hover img {
+    transform: scale(1.1);
+  }
+  .character.eliminated {
+    filter: grayscale(100%) brightness(0.7);
+    cursor: default;
+  }
+  .character span {
+    display: block;
+    margin-top: 0.3rem;
+    font-size: 0.9rem;
+  }
+</style>
+</head>
+<body>
+<h1>Qui est-ce ? Honkai: Star Rail</h1>
+<div id="chosen"></div>
+<div id="controls">
+  <button id="randomBtn">Choisir un personnage au hasard</button>
+  <button id="resetBtn">Réinitialiser</button>
+  <button id="themeBtn">Changer thème (Rouge / Bleu)</button>
+</div>
+<div id="characters">
+  <div class="character" data-name="Dan Heng">
+    <img src="https://static.wikia.nocookie.net/honkai-star-rail/images/6/6a/Dan_Heng_Icon.png" alt="Dan Heng" />
+    <span>Dan Heng</span>
+  </div>
+  <div class="character" data-name="Bronya">
+    <img src="https://static.wikia.nocookie.net/honkai-star-rail/images/8/84/Bronya_Icon.png" alt="Bronya" />
+    <span>Bronya</span>
+  </div>
+  <div class="character" data-name="Seele">
+    <img src="https://static.wikia.nocookie.net/honkai-star-rail/images/c/c7/Seele_Icon.png" alt="Seele" />
+    <span>Seele</span>
+  </div>
+  <div class="character" data-name="Himeko">
+    <img src="https://static.wikia.nocookie.net/honkai-star-rail/images/0/0f/Himeko_Icon.png" alt="Himeko" />
+    <span>Himeko</span>
+  </div>
+  <div class="character" data-name="Welt">
+    <img src="https://static.wikia.nocookie.net/honkai-star-rail/images/f/f0/Welt_Icon.png" alt="Welt" />
+    <span>Welt</span>
+  </div>
+  <div class="character" data-name="March 7th">
+    <img src="https://static.wikia.nocookie.net/honkai-star-rail/images/7/7a/March_7th_Icon.png" alt="March 7th" />
+    <span>March 7th</span>
+  </div>
+  <div class="character" data-name="Asta">
+    <img src="https://static.wikia.nocookie.net/honkai-star-rail/images/7/7c/Asta_Icon.png" alt="Asta" />
+    <span>Asta</span>
+  </div>
+  <div class="character" data-name="Bailu">
+    <img src="https://static.wikia.nocookie.net/honkai-star-rail/images/4/4b/Bailu_Icon.png" alt="Bailu" />
+    <span>Bailu</span>
+  </div>
+  <div class="character" data-name="Clara">
+    <img src="https://static.wikia.nocookie.net/honkai-star-rail/images/e/e3/Clara_Icon.png" alt="Clara" />
+    <span>Clara</span>
+  </div>
+  <div class="character" data-name="Gepard">
+    <img src="https://static.wikia.nocookie.net/honkai-star-rail/images/4/4e/Gepard_Icon.png" alt="Gepard" />
+    <span>Gepard</span>
+  </div>
+  <div class="character" data-name="Herta">
+    <img src="https://static.wikia.nocookie.net/honkai-star-rail/images/3/33/Herta_Icon.png" alt="Herta" />
+    <span>Herta</span>
+  </div>
+  <div class="character" data-name="Sushang">
+    <img src="https://static.wikia.nocookie.net/honkai-star-rail/images/8/8f/Sushang_Icon.png" alt="Sushang" />
+    <span>Sushang</span>
+  </div>
+</div>
+
+<script>
+  const characters = document.querySelectorAll('.character');
+  const chosenDiv = document.getElementById('chosen');
+  const randomBtn = document.getElementById('randomBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const themeBtn = document.getElementById('themeBtn');
+  const body = document.body;
+
+  // Toggle elimination on click
+  characters.forEach(char => {
+    char.addEventListener('click', () => {
+      if (char.classList.contains('eliminated')) {
+        char.classList.remove('eliminated');
+      } else {
+        char.classList.add('eliminated');
+      }
+    });
+  });
+
+  // Choose random character
+  randomBtn.addEventListener('click', () => {
+    const alive = Array.from(characters).filter(c => !c.classList.contains('eliminated'));
+    if (alive.length === 0) {
+      alert("Tous les personnages sont éliminés !");
+      return;
+    }
+    const randIndex = Math.floor(Math.random() * alive.length);
+    const chosenName = alive[randIndex].dataset.name;
+    chosenDiv.textContent = `Personnage choisi : ${chosenName}`;
+  });
+
+  // Reset all eliminations and chosen
+  resetBtn.addEventListener('click', () => {
+    characters.forEach(c => c.classList.remove('eliminated'));
+    chosenDiv.textContent = '';
+  });
+
+  // Toggle theme red/blue
+  themeBtn.addEventListener('click', () => {
+    body.classList.toggle('blue-theme');
+  });
+</script>
+</body>
+</html>
