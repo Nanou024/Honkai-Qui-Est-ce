@@ -87,6 +87,130 @@
     margin-top: 0.3rem;
     font-size: 0.9rem;
   }
+   /* Thème Station Herta */
+  body.theme-station-herta {
+    background-image: url('station_herta.jpg');
+    color: #e0d9d1;
+  }
+  body.theme-station-herta button {
+    background-color: rgba(30, 30, 30, 0.7);
+    border-color: #aab7c4;
+    color: #e0d9d1;
+    box-shadow: 0 0 10px rgba(170, 183, 196, 0.5);
+  }
+  body.theme-station-herta button:hover {
+    background-color: #aab7c4;
+    color: #1e1e1e;
+    border-color: #e0d9d1;
+    box-shadow: 0 0 15px #e0d9d1;
+  }
+  body.theme-station-herta #characters {
+    background-color: rgba(30, 30, 30, 0.6);
+    box-shadow: 0 0 20px rgba(170, 183, 196, 0.7);
+  }
+  body.theme-station-herta .character img {
+    box-shadow: 0 0 6px rgba(170, 183, 196, 0.8);
+  }
+
+  /* Thème Penacony */
+  body.theme-penacony {
+    background-image: url('Penacony.jpg');
+    color: #fdebd0;
+  }
+  body.theme-penacony button {
+    background-color: rgba(176, 58, 46, 0.7);
+    border-color: #f3c88c;
+    color: #fdebd0;
+    box-shadow: 0 0 10px rgba(243, 200, 140, 0.6);
+  }
+  body.theme-penacony button:hover {
+    background-color: #f3c88c;
+    color: #b03a2e;
+    border-color: #b03a2e;
+    box-shadow: 0 0 15px #b03a2e;
+  }
+  body.theme-penacony #characters {
+    background-color: rgba(176, 58, 46, 0.6);
+    box-shadow: 0 0 20px rgba(243, 200, 140, 0.7);
+  }
+  body.theme-penacony .character img {
+    box-shadow: 0 0 6px rgba(243, 200, 140, 0.8);
+  }
+
+  /* Thème Luofu */
+  body.theme-luofu {
+    background-image: url('Luofu.jpg');
+    color: #ffd54f;
+  }
+  body.theme-luofu button {
+    background-color: rgba(46, 125, 50, 0.7);
+    border-color: #fff176;
+    color: #ffd54f;
+    box-shadow: 0 0 10px rgba(255, 213, 79, 0.6);
+  }
+  body.theme-luofu button:hover {
+    background-color: #fff176;
+    color: #2e7d32;
+    border-color: #2e7d32;
+    box-shadow: 0 0 15px #2e7d32;
+  }
+  body.theme-luofu #characters {
+    background-color: rgba(46, 125, 50, 0.6);
+    box-shadow: 0 0 20px rgba(255, 213, 79, 0.7);
+  }
+  body.theme-luofu .character img {
+    box-shadow: 0 0 6px rgba(255, 213, 79, 0.8);
+  }
+
+  /* Thème Astral Express */
+  body.theme-astral-express {
+    background-image: url('Astral_express.jpg');
+    color: #eceff1;
+  }
+  body.theme-astral-express button {
+    background-color: rgba(69, 90, 100, 0.7);
+    border-color: #cfd8dc;
+    color: #eceff1;
+    box-shadow: 0 0 10px rgba(207, 216, 220, 0.6);
+  }
+  body.theme-astral-express button:hover {
+    background-color: #cfd8dc;
+    color: #455a64;
+    border-color: #455a64;
+    box-shadow: 0 0 15px #455a64;
+  }
+  body.theme-astral-express #characters {
+    background-color: rgba(69, 90, 100, 0.6);
+    box-shadow: 0 0 20px rgba(207, 216, 220, 0.7);
+  }
+  body.theme-astral-express .character img {
+    box-shadow: 0 0 6px rgba(207, 216, 220, 0.8);
+  }
+
+  /* Thème Amphoreus */
+  body.theme-amphoreus {
+    background-image: url('Amphoreus.jpg');
+    color: #fff8e1;
+  }
+  body.theme-amphoreus button {
+    background-color: rgba(184, 134, 11, 0.7);
+    border-color: #f3e5ab;
+    color: #fff8e1;
+    box-shadow: 0 0 10px rgba(243, 229, 171, 0.6);
+  }
+  body.theme-amphoreus button:hover {
+    background-color: #f3e5ab;
+    color: #b8860b;
+    border-color: #b8860b;
+    box-shadow: 0 0 15px #b8860b;
+  }
+  body.theme-amphoreus #characters {
+    background-color: rgba(184, 134, 11, 0.6);
+    box-shadow: 0 0 20px rgba(243, 229, 171, 0.7);
+  }
+  body.theme-amphoreus .character img {
+    box-shadow: 0 0 6px rgba(243, 229, 171, 0.8);
+  }
 </style>
 </head>
 <body>
@@ -95,7 +219,7 @@
 <div id="controls">
   <button id="randomBtn">Choisir un personnage au hasard</button>
   <button id="resetBtn">Réinitialiser</button>
-  <button id="themeBtn">Changer thème (Rouge / Bleu)</button>
+  <button id="themeBtn">Changer thème</button>
 </div>
 <div id="characters">
   <div class="character" data-name="Acheron">
@@ -378,27 +502,50 @@
 </div>
 
 <script>
+   const themes = [
+    'theme-station-herta',
+    'theme-penacony',
+    'theme-luofu',
+    'theme-astral-express',
+    'theme-amphoreus'
+  ];
+  let currentThemeIndex = 0;
+
+  const body = document.body;
+  const themeBtn = document.getElementById('themeBtn');
+  const charactersContainer = document.getElementById('characters');
   const characters = document.querySelectorAll('.character');
   const chosenDiv = document.getElementById('chosen');
   const randomBtn = document.getElementById('randomBtn');
   const resetBtn = document.getElementById('resetBtn');
-  const themeBtn = document.getElementById('themeBtn');
-  const body = document.body;
 
-  // Toggle elimination on click
+  themeBtn.addEventListener('click', () => {
+    // Retirer l'ancien thème
+    body.classList.remove(themes[currentThemeIndex]);
+    // Passer au thème suivant
+    currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+    // Ajouter le nouveau thème
+    body.classList.add(themes[currentThemeIndex]);
+  });
+
   characters.forEach(char => {
     char.addEventListener('click', () => {
+      char.classList.toggle('eliminated');
       if (char.classList.contains('eliminated')) {
-        char.classList.remove('eliminated');
+        charactersContainer.appendChild(char);
       } else {
-        char.classList.add('eliminated');
+        const firstEliminated = Array.from(charactersContainer.children).find(c => c.classList.contains('eliminated'));
+        if (firstEliminated) {
+          charactersContainer.insertBefore(char, firstEliminated);
+        } else {
+          charactersContainer.appendChild(char);
+        }
       }
     });
   });
 
-  // Choose random character
   randomBtn.addEventListener('click', () => {
-    const alive = Array.from(characters).filter(c => !c.classList.contains('eliminated'));
+    const alive = Array.from(charactersContainer.children).filter(c => !c.classList.contains('eliminated'));
     if (alive.length === 0) {
       alert("Tous les personnages sont éliminés !");
       return;
@@ -408,15 +555,9 @@
     chosenDiv.textContent = `Personnage choisi : ${chosenName}`;
   });
 
-  // Reset all eliminations and chosen
   resetBtn.addEventListener('click', () => {
-    characters.forEach(c => c.classList.remove('eliminated'));
+    Array.from(charactersContainer.children).forEach(c => c.classList.remove('eliminated'));
     chosenDiv.textContent = '';
-  });
-
-  // Toggle theme red/blue
-  themeBtn.addEventListener('click', () => {
-    body.classList.toggle('blue-theme');
   });
 </script>
 </body>
