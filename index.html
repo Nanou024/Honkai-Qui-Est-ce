@@ -5,54 +5,43 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Qui est-ce ? Honkai: Star Rail</title>
 <style>
-  :root {
-    --red-bg: #ffe6e6;
-    --red-text: #a00000;
-    --red-elim: #ffcccc;
-    --blue-bg: #e6f0ff;
-    --blue-text: #003a9a;
-    --blue-elim: #cce0ff;
-  }
+ /* Styles communs */
   body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     margin: 0; padding: 0;
-    background: var(--red-bg);
-    color: var(--red-text);
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-  }
-  body.blue-theme {
-    background: var(--blue-bg);
-    color: var(--blue-text);
+    transition: background 0.8s, color 0.8s;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
   }
   h1 {
     margin: 1rem 0 0.5rem;
+    font-weight: 700;
+    text-shadow: 0 0 5px rgba(0,0,0,0.7);
   }
   #chosen {
     font-weight: bold;
     font-size: 1.3rem;
     margin-bottom: 1rem;
     min-height: 1.5em;
+    text-shadow: 0 0 8px rgba(0,0,0,0.9);
   }
   #controls {
     margin-bottom: 1rem;
   }
   button {
-    background-color: transparent;
-    border: 2px solid currentColor;
-    color: inherit;
     padding: 0.5em 1em;
     margin: 0 0.5em;
     font-size: 1rem;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  button:hover {
-    background-color: currentColor;
-    color: white;
+    border: 2px solid;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    box-shadow: 0 0 10px;
   }
   #characters {
     display: grid;
@@ -60,6 +49,10 @@
     gap: 1rem;
     width: 90vw;
     max-width: 800px;
+    padding: 1rem;
+    border-radius: 15px;
+    box-shadow: 0 0 20px;
+    transition: background-color 0.8s, box-shadow 0.8s;
   }
   .character {
     text-align: center;
@@ -72,7 +65,7 @@
     height: 100px;
     object-fit: contain;
     border-radius: 10px;
-    box-shadow: 0 0 6px rgba(0,0,0,0.1);
+    box-shadow: 0 0 6px;
     transition: transform 0.3s;
   }
   .character:hover img {
@@ -86,6 +79,7 @@
     display: block;
     margin-top: 0.3rem;
     font-size: 0.9rem;
+    text-shadow: 0 0 3px rgba(0,0,0,0.8);
   }
    /* Thème Station Herta */
   body.theme-station-herta {
